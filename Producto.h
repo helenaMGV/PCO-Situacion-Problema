@@ -25,7 +25,6 @@ public:
     void agregarPromocion();
 
     double precioDescontado();
-    void aplicarDescuento(); //creo que este sería metodo de Super (agregar otro articulo si promocion = true)y7
 
     void restock(int unidades); //usar para rehabastecer inventario o regresar cantidad si se cancela compra
     void quitar(int unidades); //usar al momento de comprar
