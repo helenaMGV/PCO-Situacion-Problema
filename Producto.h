@@ -31,7 +31,8 @@ public:
     string getNombre() const;
     float getPrecio() const;
     int getInventario() const;
-
+    
+    bool hayInventario(int unidades);
     void restock(int unidades); //usar para rehabastecer inventario o regresar cantidad si se cancela compra
     void quitar(int unidades); //usar al momento de comprar
 
