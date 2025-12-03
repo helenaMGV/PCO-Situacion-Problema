@@ -1,7 +1,7 @@
 #include "Supermercado.h"
 #include <iostream>
 
-using namespace std>;
+using namespace std;
 
 Supermercado::Supermercado() { 
 nombre = "";
@@ -12,13 +12,16 @@ nombre = cNombre;
 cliente = cCliente;
 ventas = 0;
 }
+
 void Supermercado::agregarProducto(const Producto &cProducto) {
     productos.push_back(cProducto);
 }
 
 void Supermercado::eliminarProducto(const string &ID) {
     int index = buscarProducto(ID);
+        // index -1 : No existe: Producto no encontrado
     if (index != -1) {
+        //eliminar producto con (inicio + index = index) pasado por parametro
         productos.erase(productos.begin() + index);
         cout << "Producto eliminado.\n";
     } else {
@@ -35,16 +38,20 @@ int Supermercado::buscarProducto(const string &ID) {
     return -1;
 }
 
+vector<Producto>& Supermercado::getProductos() {
+    return productos;
+}
+
 Cliente& Supermercado::getCliente() {
     return cliente;
 }
 
 void Supermercado::mostrarProductos() const {
-    cout << "\n--- Inventario del Supermercado ---\n";
-    for (const auto &p : productos) {
-        p.print();
-        cout << "   Inventario: " << p.getInventario() << endl;
-        cout << "------------------------------\n";
+    cout << "\n--- Inventario del Supermercado ---" << endl;
+    for (const auto & cProducto : productos) {
+        cProducto.print();
+        cout << "   Inventario: " << cProducto.getInventario() << endl;
+        cout << "------------------------------" << endl;
     }
 }
 
@@ -53,12 +60,12 @@ bool Supermercado::realizarVenta() {
     float total = cliente.calcularTotal();
 
     if (total <= 0) {
-        cout << "El carrito está vacío.\n";
+        cout << "El carrito está vacío" << endl;
         return false;
     }
 
     if (!cliente.confirmarCompra()) {
-        cout << "El cliente no tiene suficiente dinero.\n";
+        cout << "El cliente no prosiguió la compra" << endl;
         return false;
     }
 
@@ -74,7 +81,7 @@ bool Supermercado::realizarVenta() {
     cliente.pagar();
     ventas++;
 
-    cout << "Venta realizada con éxito.\n";
+    cout << "Venta realizada con éxito" << endl;
     return true;
 }
 
@@ -83,5 +90,35 @@ int Supermercado::getVentas() const {
 }
 
 Supermercado::~Supermercado() {
-    // No necesitas hacer nada especial aquí
+    // Nada especial aquí
 }
+
+void Supermercado::leerFichero(const string & fichero) {
+    ifstream archivo(fichero);
+    if (!archivo.is_open()) {
+        cout << "Error al abrir archivo.\n";
+        return;
+    }
+
+    string id, nombre, tipo, precioStr;
+    float precio;
+
+    while (true) {
+        // Leer las 4 líneas por producto
+        if (!getline(archivo, id)) break;
+        if (!getline(archivo, nombre)) break;
+        if (!getline(archivo, tipo)) break;
+        if (!getline(archivo, precioStr)) break;
+
+        // Convertir precio string -> float
+        precio = stof(precioStr);
+
+        // Crear producto y agregarlo al vector
+        Producto p(nombre, id, precio, tipo);
+        productos.push_back(p);
+    }
+
+    archivo.close();
+    cout << "Productos importados correctamente.\n";
+}
+

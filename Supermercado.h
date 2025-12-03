@@ -19,13 +19,16 @@ private:
 public:
   Supermercado();
   Supermercado(const string &cNombre, const Cliente &cCLiente);
+  void leerFichero();
   void agregarProducto(const Producto &cProducto);
   void eliminarProducto(const string &ID);
   int buscarProducto(const string &ID);
   Cliente& getCliente();
+  vector<Producto>& getProductos();
   void mostrarProductos() const;
   bool realizarVenta();
   int getVentas() const;
+
 
 ~Supermercado();
 };
