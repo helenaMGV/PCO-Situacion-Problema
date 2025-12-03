@@ -2,10 +2,14 @@
 using namespace std;
 #include "Producto.h"
 #include "Supermercado.h"
+#include "Cliente.h"
 
 int main() {
     Supermercado OXXO;
-    Cliente ClienteInicial;
+    string archivo = "Productos.txt";
+    OXXO.leerFichero(archivo);
+    Cliente ClienteInicial("Sasha", 100);
+
 }
 
 
