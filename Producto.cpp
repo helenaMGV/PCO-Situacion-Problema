@@ -40,6 +40,9 @@ void Producto::restock(int unidades) {
 void Producto::quitar(int unidades) {
     this -> inventario -= unidades;
 }
+bool Producto::hayExistencia( int unidades){
+    return (inventario >= unidades);
+}
 string Producto::getID() const { 
     return ID; 
 }
