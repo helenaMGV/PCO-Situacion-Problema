@@ -23,9 +23,16 @@ public:
 
     void agregarDescuento(int porcentaje);
     void agregarPromocion();
-
     double precioDescontado();
+    double precioPromocion(); //dividir precio en 2
 
+//Getters 
+    string getID() const;
+    string getNombre() const;
+    float getPrecio() const;
+    int getInventario() const;
+    
+    bool hayInventario(int unidades);
     void restock(int unidades); //usar para rehabastecer inventario o regresar cantidad si se cancela compra
     void quitar(int unidades); //usar al momento de comprar
 
