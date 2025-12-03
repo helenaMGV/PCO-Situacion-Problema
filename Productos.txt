@@ -1,0 +1,40 @@
+0001
+Coca-Cola
+Bebida
+18.50
+0002
+Sabritas Original
+Botana
+19.00
+0003
+Galletas Oreos
+Dulce
+16.00
+0004
+Red Bull
+Energética
+42.00
+0005
+Agua Ciel
+Bebida
+13.00
+0006
+Pan Bimbo
+Panadería
+52.00
+0007
+Halls Menthos
+Dulce
+14.00
+0008
+Maruchan Camarón
+Instantáneo
+18.00
+0009
+Chocolate Carlos V
+Dulce
+12.00
+0010
+Yakult 5 pzas
+Lácteo
+20.00
