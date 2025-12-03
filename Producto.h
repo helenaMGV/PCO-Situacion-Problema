@@ -32,7 +32,7 @@ public:
     float getPrecio() const;
     int getInventario() const;
     
-    bool hayInventario(int unidades);
+    bool hayExistencia(int unidades);
     void restock(int unidades); //usar para rehabastecer inventario o regresar cantidad si se cancela compra
     void quitar(int unidades); //usar al momento de comprar
 

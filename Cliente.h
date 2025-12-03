@@ -4,6 +4,12 @@
 
 #ifndef PCO_SITUACION_PROBLEMA_CLIENTE_H
 #define PCO_SITUACION_PROBLEMA_CLIENTE_H
+#include "Producto.h"
+
+#include <string>
+#include <vector>
+using namespace std;
+class Supermercado;
 
 class Cliente {
 private:
@@ -15,10 +21,11 @@ public:
     Cliente();
     Cliente(string cNombre, float cDinero);
     int buscarProducto (string cNombreProducto);
-    void agregarProducto (string cNombreProducto);
-    void quitarProducto (string cNombreProducto);
+    void agregarProducto (Supermercado & cTienda);
+    void quitarProducto(string cNombreProducto, Supermercado &cTienda);
     void vaciarCarrito();
     void mostrarCarrito();
+    vector<Producto>& getCarrito();
     bool confirmarCompra();
     float calcularTotal();
     void pagar();

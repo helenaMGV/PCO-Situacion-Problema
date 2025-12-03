@@ -1,5 +1,7 @@
 #include "Supermercado.h"
+#include "Cliente.h"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -9,7 +11,7 @@ ventas = 0; }
 
 Supermercado::Supermercado(const string &cNombre, const Cliente &cCliente) {
 nombre = cNombre;
-cliente = cCliente;
+clienteActual = cCliente;
 ventas = 0;
 }
 
@@ -43,12 +45,12 @@ vector<Producto>& Supermercado::getProductos() {
 }
 
 Cliente& Supermercado::getCliente() {
-    return cliente;
+    return clienteActual;
 }
 
-void Supermercado::mostrarProductos() const {
+void Supermercado::mostrarProductos(){
     cout << "\n--- Inventario del Supermercado ---" << endl;
-    for (const auto & cProducto : productos) {
+    for (auto & cProducto : productos){
         cProducto.print();
         cout << "   Inventario: " << cProducto.getInventario() << endl;
         cout << "------------------------------" << endl;
@@ -57,20 +59,20 @@ void Supermercado::mostrarProductos() const {
 
 bool Supermercado::realizarVenta() {
 
-    float total = cliente.calcularTotal();
+    float total = clienteActual.calcularTotal();
 
     if (total <= 0) {
         cout << "El carrito está vacío" << endl;
         return false;
     }
 
-    if (!cliente.confirmarCompra()) {
+    if (!clienteActual.confirmarCompra()) {
         cout << "El cliente no prosiguió la compra" << endl;
         return false;
     }
 
     // Descontar inventario
-    for (const auto &prodCarrito : cliente.getCarrito()) {
+    for (const auto &prodCarrito : clienteActual.getCarrito()) {
 
         int index = buscarProducto(prodCarrito.getID());
         if (index != -1) {
@@ -78,7 +80,7 @@ bool Supermercado::realizarVenta() {
         }
     }
 
-    cliente.pagar();
+    clienteActual.pagar();
     ventas++;
 
     cout << "Venta realizada con éxito" << endl;
