@@ -30,12 +30,27 @@ double Producto::precioDescontado() {
    double descuento = precio * (this -> descuento/100);
     return precio - descuento;
 }
+double Producto::precioPromocion(){
+    return precio/2;
+}
 
 void Producto::restock(int unidades) {
     this -> inventario += unidades;
 }
 void Producto::quitar(int unidades) {
     this -> inventario -= unidades;
+}
+string Producto::getID() const { 
+    return ID; 
+}
+string Producto::getNombre() const { 
+    return nombre; 
+}
+float Producto::getPrecio() const { 
+    return precio; 
+}
+int Producto:: getInventario() const { 
+    return inventario; 
 }
 void Producto::print() {
     cout << "Producto: "<< nombre << ", $" << precio << endl;
