@@ -26,7 +26,10 @@ public:
   void eliminarProducto(const string &ID);
   int buscarProducto(const string &ID);
   void restockProducto(const string &id, int unidades);
+
   Cliente& getCliente();
+  void setCliente(Cliente &cCliente);
+
 
   vector<Producto>& getProductos();
   void mostrarProductos() ;

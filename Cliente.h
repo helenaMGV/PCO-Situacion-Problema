@@ -20,12 +20,15 @@ private:
 public:
     Cliente();
     Cliente(string cNombre, float cDinero);
+
     int buscarProducto (string cNombreProducto);
     void agregarProducto (Supermercado & cTienda);
     void quitarProducto(string cNombreProducto, Supermercado &cTienda);
     void vaciarCarrito();
     void mostrarCarrito();
+
     vector<Producto>& getCarrito();
+
     bool confirmarCompra();
     float calcularTotal();
     void pagar();
