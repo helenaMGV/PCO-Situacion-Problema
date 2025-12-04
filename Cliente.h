@@ -17,6 +17,7 @@ private:
     vector <Producto> carrito;
     float dinero;
     float total;
+
 public:
     //CONSTRUCTOR
     Cliente();
@@ -29,11 +30,17 @@ public:
     int buscarProducto (string cNombreProducto);
     void agregarProducto (Supermercado & cTienda);
     void quitarProducto(string cNombreProducto, Supermercado &cTienda);
-    vector<Producto>& getCarrito();
 
     //METODOS CARRITO
     void vaciarCarrito();
     void mostrarCarrito();
+
+    struct ProductoResumen {
+        string nombre;
+        float precio;
+        int cantidad;
+    };
+    vector<ProductoResumen> getResumenCarrito() const;
 
     //METODOS COMPRA
     bool confirmarCompra();
