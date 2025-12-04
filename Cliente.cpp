@@ -22,6 +22,15 @@ Cliente::Cliente(string cNombre, float cDinero) {
 }
 
 //          METODOS PRODUCTO
+int Cliente::buscarProducto(string cNombreProducto) {
+    for (int i = 0; i < carrito.size(); i++) {
+        if (carrito[i].getNombre() == cNombreProducto) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void Cliente::agregarProducto(Supermercado &cTienda) {
     string nombreProducto;
     int unidades;
