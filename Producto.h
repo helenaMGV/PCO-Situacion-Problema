@@ -15,16 +15,9 @@ private:
     float precio;
     string tipo;
     int inventario;
-    int descuento;
-    bool promocion; //No se si manejarlo como bool o string "2x1","3x2"
 public:
     Producto();
     Producto(string cNombre, string cID, float cPrecio, string cTipo);
-
-    void agregarDescuento(int porcentaje);
-    void agregarPromocion();
-    double precioDescontado();
-    double precioPromocion(); //dividir precio en 2
 
 //Getters 
     string getID() const;
