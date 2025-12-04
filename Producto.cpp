@@ -11,27 +11,9 @@ Producto::Producto() {
     precio = 0.0;
     tipo = " ";
     inventario = 5;
-    descuento = 0;
-    promocion = false;
 }
 Producto::Producto(string cNombre, string cID, float cPrecio, string cTipo):nombre(cNombre), ID(cID), precio(cPrecio), tipo(cTipo) {
     inventario = 5;
-    descuento = 0;
-    promocion = false;
-}
-void Producto::agregarDescuento(int porcentaje) {
-    this -> descuento = porcentaje;
-}
-void Producto::agregarPromocion() {
-    this -> promocion = true;
-}
-
-double Producto::precioDescontado() {
-   double descuento = precio * (this -> descuento/100);
-    return precio - descuento;
-}
-double Producto::precioPromocion(){
-    return precio/2;
 }
 
 void Producto::restock(int unidades) {
@@ -58,10 +40,4 @@ int Producto:: getInventario() const {
 void Producto::print() {
     cout << "Producto: "<< nombre << ", $" << precio << endl;
     cout << "   Tipo: " << tipo << endl;
-    if (descuento > 0) {
-        cout << "Descuento: " << descuento << endl;
-    }
-    if (promocion) {
-        cout << "El producto tiene 2x1" << endl;
-    }
 }

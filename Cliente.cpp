@@ -65,7 +65,11 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
     int unidades;
 
     cout << "¿Cuantas unidades desea quitar? ";
-    cin >> unidades;
+    string input;
+    getline(cin, input);
+    unidades = stoi(input);
+
+
 
     int contadorQuitados = 0;
 
@@ -92,15 +96,15 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
         if (carrito[i].getNombre() == cNombreProducto) {
             carrito.erase(carrito.begin() + i);
             contadorQuitados++;
-
-            // Regresar inventario
-            productoSuper->restock(contadorQuitados);
-
         } else {
             i++;
         }
     }
-
+    // Regresar inventario
+    if (contadorQuitados > 0) {
+        productoSuper->restock(contadorQuitados);
+        cout << "Se quitaron " << contadorQuitados << " unidad(es)." << endl;
+    }
     // Resultados
     if (contadorQuitados == 0) {
         cout << "El producto '" << cNombreProducto << "' no esta en el carrito." << endl;
