@@ -27,19 +27,19 @@ void Cliente::agregarProducto(Supermercado &cTienda) {
     int unidades;
 
     cout << "Ingrese el nombre del producto que desea agregar: ";
-    cin >> nombreProducto;
+    getline(cin, nombreProducto);
 
-    cout << "¿Cuántas unidades desea agregar? ";
+    cout << "¿Cuantas unidades desea agregar? ";
     cin >> unidades;
+    cin.ignore();
 
     vector<Producto>& inventario = cTienda.getProductos();
+    bool encontrado = false;
 
     for (auto& p : inventario) {
         if (p.getNombre() == nombreProducto) {
-
             if (!p.hayExistencia(unidades)) {
-                cout << "No hay inventario suficiente. Existencia: "
-                     << p.getInventario() << endl;
+                cout << "No hay inventario suficiente. Existencia: " << p.getInventario() << endl;
                 return;
             }
 
@@ -49,20 +49,22 @@ void Cliente::agregarProducto(Supermercado &cTienda) {
                 carrito.push_back(p);
             }
 
-            cout << "Se agregaron " << unidades
-                 << " unidad(es) de " << nombreProducto
-                 << " al carrito.\n";
+            cout << "Se agregaron " << unidades << " unidad(es) de " << nombreProducto << " al carrito"<< endl;
+
+            encontrado = true;
             break;
         }
     }
-    cout << "El producto '" << nombreProducto << "' no existe en el supermercado.\n";
+    if (!encontrado) {
+        cout << "El producto '" << nombreProducto << "' no existe en el supermercado"<< endl;
+    }
 }
 
 
 void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
     int unidades;
 
-    cout << "¿Cuántas unidades desea quitar? ";
+    cout << "¿Cuantas unidades desea quitar? ";
     cin >> unidades;
 
     int contadorQuitados = 0;
@@ -71,6 +73,7 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
     vector<Producto>& inventario = cTienda.getProductos();
     Producto* productoSuper = nullptr;
 
+    //designar objeto por referencia a producto buscado
     for (auto& p : inventario) {
         if (p.getNombre() == cNombreProducto) {
             productoSuper = &p;
@@ -78,6 +81,7 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
         }
     }
 
+    //Si el producto a eliminar no existe
     if (productoSuper == nullptr) {
         cout << "Error: producto no encontrado en tienda." << endl;
         return;
@@ -90,7 +94,7 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
             contadorQuitados++;
 
             // Regresar inventario
-            productoSuper->restock(1);
+            productoSuper->restock(contadorQuitados);
 
         } else {
             i++;
@@ -99,11 +103,9 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
 
     // Resultados
     if (contadorQuitados == 0) {
-        cout << "El producto '" << cNombreProducto
-             << "' no está en el carrito." << endl;
+        cout << "El producto '" << cNombreProducto << "' no esta en el carrito." << endl;
     } else {
-        cout << "Se quitaron " << contadorQuitados
-             << " unidad(es) de " << cNombreProducto << "." << endl;
+        cout << "Se quitaron " << contadorQuitados << " unidad(es) de " << cNombreProducto << "." << endl;
     }
 }
 
@@ -111,6 +113,9 @@ void Cliente::vaciarCarrito() {
     carrito.clear();
 }
 void Cliente::mostrarCarrito() {
+    if (carrito.size() == 0) {
+        cout << "Su carrito esta vacio" << endl;
+    }
     for (int i = 0; i < carrito.size(); i++) {
         cout << carrito[i].getNombre()<< " - $" << carrito[i].getPrecio()<< endl;
     }
