@@ -81,6 +81,8 @@ bool Supermercado::realizarVenta() {
     }
 
     clienteActual.pagar();
+    pagoSinContacto(); // Implementacion de pago sin contacto
+    
     ventas++;
 
     cout << "Venta realizada con éxito" << endl;
@@ -122,5 +124,10 @@ void Supermercado::leerFichero(const string & fichero) {
 
     archivo.close();
     cout << "Productos importados correctamente.\n";
+}
+
+// Metodo para simular pago con contacto
+void Supermercado::pagoSinContacto(){
+    cout << "Pago sin contacto procesado exitosamente"; 
 }
 
