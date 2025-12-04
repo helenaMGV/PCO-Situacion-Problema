@@ -5,15 +5,15 @@ using namespace std;
 #include "Cliente.h"
 
 int main() {
-    Supermercado OXXO;
-    OXXO.leerFichero("Productos.txt");
+    Supermercado Abarrotes;
+    Abarrotes.leerFichero("Productos.csv");
 
     Cliente clienteA("Sasha", 100);
-    OXXO.setCliente(clienteA);
+    Abarrotes.setCliente(clienteA);
 
 
     //TESTEO CLASE CLIENTE
-    cout << "--------- Bienvenido a OXXO ---------" << endl;
+    cout << "--------- Bienvenido a Abarrotes 'Doña Maria' ---------" << endl;
     bool salir = false;
     int opcion;
 
@@ -32,11 +32,11 @@ int main() {
 
         switch (opcion) {
             case 1:
-                OXXO.mostrarProductos();
+                Abarrotes.mostrarProductos();
                 break;
 
             case 2: {
-                clienteA.agregarProducto(OXXO);
+                clienteA.agregarProducto(Abarrotes);
                 break;
             }
 
@@ -44,7 +44,7 @@ int main() {
                 cout << "Ingrese el nombre del producto a eliminar: ";
                 string nombreEliminar;
                 getline(cin, nombreEliminar);
-                clienteA.quitarProducto(nombreEliminar, OXXO);
+                clienteA.quitarProducto(nombreEliminar, Abarrotes);
                 break;
             }
 
@@ -60,15 +60,15 @@ int main() {
                     switch (opcionPago) {
                         //PAGAR SIN CONTACTO
                         case 'S':
-                        OXXO.pagoSinContacto();
-                            OXXO.realizarVenta();
+                        Abarrotes.pagoSinContacto();
+                            Abarrotes.realizarVenta();
                             cout << "Gracias por su compra"<<endl;
                             salir = true;
                             break;
 
                         //PAGAR REGULARMENTE
                         case 'R':
-                            OXXO.realizarVenta();
+                            Abarrotes.realizarVenta();
                             cout << "Gracias por su compra"<<endl;
                             salir = true;
                             break;
@@ -92,10 +92,10 @@ int main() {
 
     //TESTEO DE CLASE SUPERMERCADO Y PRODUCTO
     Producto huevo("huevo","H123", 34.00, "Producto Animal");
-    OXXO.agregarProducto(huevo);
-    OXXO.mostrarProductos();
-    OXXO.restockProducto("H123", 20);
-    OXXO.mostrarProductos();
-    cout << "Ventas realizadas: " << OXXO.getVentas() << endl;
+    Abarrotes.agregarProducto(huevo);
+    Abarrotes.mostrarProductos();
+    Abarrotes.restockProducto("H123", 20);
+    Abarrotes.mostrarProductos();
+    cout << "Ventas realizadas: " << Abarrotes.getVentas() << endl;
     return 0;
 }
