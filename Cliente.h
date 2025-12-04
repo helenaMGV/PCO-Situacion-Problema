@@ -22,6 +22,9 @@ public:
     Cliente();
     Cliente(string cNombre, float cDinero);
 
+    //SETTER
+    void setTotal(float cTotal);
+
     //METODOS PRODUCTO
     int buscarProducto (string cNombreProducto);
     void agregarProducto (Supermercado & cTienda);

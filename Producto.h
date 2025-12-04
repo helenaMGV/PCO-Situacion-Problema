@@ -16,6 +16,7 @@ private:
     string tipo;
     int inventario;
 public:
+    //Constructores
     Producto();
     Producto(string cNombre, string cID, float cPrecio, string cTipo);
 

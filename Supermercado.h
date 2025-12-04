@@ -24,12 +24,12 @@ public:
 
   //  METODOS PRODUCTO
   void leerFichero(const string & fichero);
-  void agregarProducto(const Producto & cProducto);
+  void agregarProducto(const Producto & cProducto); //1. crear producto 2. pasar objeto directo
   void eliminarProducto(const string &ID);
   int buscarProducto(const string &ID);
-  void restockProducto(const string &id, int unidades);
+  void restockProducto(const string &id, int unidades); //llama Metodo producto restock()
   vector<Producto>& getProductos();
-  void mostrarProductos() ;
+  void mostrarProductos() ; //usa metodo print de clase producto
 
     //METODOS CLIENTE
   Cliente& getCliente();
