@@ -30,6 +30,8 @@ public:
     void quitar(int unidades); //usar al momento de comprar
 
     void print();
+
+    ~Producto();  
 };
 
 
