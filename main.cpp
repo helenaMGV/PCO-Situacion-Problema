@@ -52,9 +52,23 @@ int main() {
 
             case 5:
                 if (clienteA.confirmarCompra()) {
-                    clienteA.pagar();
-                    cout << "Gracias por su compra"<<endl;
-                    salir = true;
+                    cout << "Desea pagar sin contacto o regularmente?: (S: Sin Contacto, R:Regularmente) "<<endl;
+                    char opcionPago;
+                    cin >> opcionPago;
+                    switch (opcionPago) {
+                        //PAGAR SIN CONTACTO
+                        case 'S':
+
+
+
+                        //PAGAR REGULARMENTE
+                        case 'R':
+                            clienteA.pagar();
+                            cout << "Gracias por su compra"<<endl;
+                            salir = true;
+                            break;
+                    }
+
                 } else {
                     cout << "No tiene dinero suficiente"<<endl;
                 }
