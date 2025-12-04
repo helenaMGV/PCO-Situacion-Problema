@@ -135,9 +135,34 @@ void Cliente::mostrarCarrito() {
     }
 }
 
-vector<Producto>& Cliente::getCarrito() {
-    return carrito;
+//vector<Producto>& Cliente::getCarrito() {
+   // return carrito;}
+
+vector<Cliente::ProductoResumen> Cliente::getResumenCarrito() const {
+    vector<ProductoResumen> resumen;
+
+    for (const auto &producto : carrito) {
+        bool encontrado = false;
+
+        // Buscar si ya está en el resumen
+        for (auto &r : resumen) {
+            if (r.nombre == producto.getNombre()) {
+                r.cantidad++;
+                encontrado = true;
+                break;
+            }
+        }
+
+        // Si no estaba, agregar nuevo
+        if (!encontrado) {
+            resumen.push_back({producto.getNombre(), producto.getPrecio(), 1});
+        }
+    }
+
+    return resumen;
 }
+
+
 
 //          METODOS COMPRA
 float Cliente::calcularTotal() {

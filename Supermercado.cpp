@@ -117,38 +117,13 @@ bool Supermercado::realizarVenta() {
     // Mostrar ticket
     cout << endl << "========== TICKET DE COMPRA ==========" << endl;
 
-    vector<Producto> carrito = clienteActual.getCarrito();
-    vector<string> productosEscaneados; // Para no repetir productos en el ticket
+    vector<Cliente::ProductoResumen> resumen = clienteActual.getResumenCarrito();
 
-    //BUCLE REGISTRAR NOMBRE Y TOTAL Por cada producto
-    for (int i = 0; i < carrito.size(); i++) {
-        string nombre = carrito[i].getNombre();
-        // Saltar proceso si ya se registro este producto
-        bool yaRegistrado = false;
-        for (int k = 0; k < productosEscaneados.size(); k++) {
-            if (productosEscaneados[k] == nombre) {
-                yaRegistrado = true;
-                break;
-            }
-        }
-        if (yaRegistrado) continue;
-
-        // REGISTRAR UNIDADES de cada producto  en el carrito
-        int unidades = 0;
-        for (int j = 0; j < carrito.size(); j++) {
-            if (carrito[j].getNombre() == nombre) unidades++;
-        }
-        //CALCULAR TOTAL POR PRODUCTO
-        float subtotal = carrito[i].getPrecio() * unidades;
-        cout << nombre << " x" << unidades << "  $" << subtotal << endl;
-
-        //AGREGAR PRODUCTO A TICKET
-        productosEscaneados.push_back(nombre);
+    cout << "========== TICKET DE COMPRA ==========" << endl;
+    for (auto &r : resumen) {
+        cout << r.nombre << " x" << r.cantidad << "  $" << r.precio * r.cantidad << endl;
     }
-
-    cout << "--------------------------------------" << endl;
-    cout << "TOTAL A PAGAR: $" << total << endl;
-    cout << "--------------------------------------" << endl;
+    cout << "TOTAL A PAGAR: $" << clienteActual.calcularTotal() << endl;
 
     // Procesar pago
     clienteActual.pagar();
