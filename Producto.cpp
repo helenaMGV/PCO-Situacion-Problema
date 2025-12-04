@@ -48,3 +48,5 @@ void Producto::print() {
     cout << "Producto: "<< nombre << ", $" << precio << endl;
     cout << "   Tipo: " << tipo << endl;
 }
+
+Producto::~Producto() {}
