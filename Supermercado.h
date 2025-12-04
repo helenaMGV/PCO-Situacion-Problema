@@ -34,6 +34,8 @@ public:
   bool realizarVenta();
   int getVentas() const;
 
+  void pagoSinContacto();
+
 
 ~Supermercado();
 };
