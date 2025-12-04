@@ -5,38 +5,37 @@ using namespace std;
 #include "Cliente.h"
 
 int main() {
-    Supermercado superDonaMary;
-    superDonaMary.leerFichero("Productos.txt");
+    Supermercado Abarrotes;
+    Abarrotes.leerFichero("Productos.txt");
 
     Cliente clienteA("Sasha", 100);
-    superDonaMary.setCliente(clienteA);
+    Abarrotes.setCliente(clienteA);
 
+    cout << "--------- Bienvenido a Abarrotes 'Doña Maria' ---------" << endl;
 
-    //TESTEO CLASE CLIENTE
-    cout << "--------- Bienvenido a Super Dona Mary ---------" << endl;
     bool salir = false;
     int opcion;
 
     while (!salir) {
 
-        cout << "--------MENU-------"<< endl;
-        cout << "1. Mostrar productos disponibles"<< endl;;
-        cout << "2. Agregar producto al carrito" << endl;;
+        cout << "-------- MENU -------" << endl;
+        cout << "1. Mostrar productos disponibles" << endl;
+        cout << "2. Agregar producto al carrito" << endl;
         cout << "3. Quitar producto del carrito" << endl;
         cout << "4. Mostrar carrito" << endl;
         cout << "5. Pagar" << endl;
         cout << "6. Salir" << endl;
-        cout << "Elige una opcion: " << endl;
+        cout << "Elige una opcion: ";
         cin >> opcion;
         cin.ignore();
 
         switch (opcion) {
             case 1:
-                superDonaMary.mostrarProductos();
+                Abarrotes.mostrarProductos();
                 break;
 
             case 2: {
-                clienteA.agregarProducto(superDonaMary);
+                clienteA.agregarProducto(Abarrotes);
                 break;
             }
 
@@ -44,7 +43,7 @@ int main() {
                 cout << "Ingrese el nombre del producto a eliminar: ";
                 string nombreEliminar;
                 getline(cin, nombreEliminar);
-                clienteA.quitarProducto(nombreEliminar, superDonaMary);
+                clienteA.quitarProducto(nombreEliminar, Abarrotes);
                 break;
             }
 
@@ -54,48 +53,51 @@ int main() {
 
             case 5:
                 if (clienteA.confirmarCompra()) {
-                    cout << "Desea pagar sin contacto o regularmente?: (S: Sin Contacto, R:Regularmente) "<<endl;
+                    cout << "Desea pagar sin contacto o regularmente?: (S: Sin Contacto, R: Regularmente) ";
                     char opcionPago;
                     cin >> opcionPago;
+
                     switch (opcionPago) {
-                        //PAGAR SIN CONTACTO
                         case 'S':
-                        superDonaMary.pagoSinContacto();
-                            superDonaMary.realizarVenta();
-                            cout << "Gracias por su compra"<<endl;
+                            Abarrotes.pagoSinContacto();
+                            Abarrotes.realizarVenta();
+                            cout << "\nGracias por su compra" << endl;
                             salir = true;
                             break;
 
-                        //PAGAR REGULARMENTE
                         case 'R':
-                            superDonaMary.realizarVenta();
-                            cout << "Gracias por su compra"<<endl;
+                            Abarrotes.realizarVenta();
+                            cout << "\nGracias por su compra" << endl;
                             salir = true;
+                            break;
+
+                        default:
+                            cout << "Opción inválida" << endl;
                             break;
                     }
-
                 } else {
-                    cout << "No tiene dinero suficiente"<<endl;
+                    cout << "No tiene dinero suficiente" << endl;
                 }
                 break;
 
             case 6:
-                cout << "Saliendo del Super Dona Mary"<<endl;
+                cout << "Saliendo de Abarrotes 'Doña Maria'" << endl;
                 salir = true;
                 break;
 
             default:
-                cout << "Opcion inválida. Intente de nuevo"<<endl;
+                cout << "Opción inválida. Intente de nuevo" << endl;
                 break;
         }
     }
 
-    //TESTEO DE CLASE SUPERMERCADO Y PRODUCTO
-    Producto huevo("huevo","H123", 34.00, "Producto Animal");
-    superDonaMary.agregarProducto(huevo);
-    superDonaMary.mostrarProductos();
-    superDonaMary.restockProducto("H123", 20);
-    superDonaMary.mostrarProductos();
-    cout << "Ventas realizadas: " << superDonaMary.getVentas() << endl;
+    // TESTEO DE SUPERMERCADO Y PRODUCTO
+    Producto huevo("huevo", "H123", 34.00, "Producto Animal");
+    Abarrotes.agregarProducto(huevo);
+    Abarrotes.mostrarProductos();
+    Abarrotes.restockProducto("H123", 20);
+    Abarrotes.mostrarProductos();
+
+    cout << "Ventas realizadas: " << Abarrotes.getVentas() << endl;
     return 0;
 }
