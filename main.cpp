@@ -58,8 +58,11 @@ int main() {
                     switch (opcionPago) {
                         //PAGAR SIN CONTACTO
                         case 'S':
-
-
+                        OXXO.pagoSinContacto();
+                            clienteA.pagar();
+                            cout << "Gracias por su compra"<<endl;
+                            salir = true;
+                            break;
 
                         //PAGAR REGULARMENTE
                         case 'R':
