@@ -49,11 +49,11 @@ int main() {
             }
 
             case 4:
-                clienteA.mostrarCarrito();
+                Abarrotes.getCliente().mostrarCarrito();
                 break;
 
             case 5:
-                if (clienteA.confirmarCompra()) {
+                if (Abarrotes.getCliente().confirmarCompra()) {
                     cout << "Desea pagar sin contacto o regularmente?: (S: Sin Contacto, R:Regularmente) "<<endl;
                     char opcionPago;
                     cin >> opcionPago;
@@ -93,9 +93,9 @@ int main() {
     //TESTEO DE CLASE SUPERMERCADO Y PRODUCTO
     Producto huevo("huevo","H123", 34.00, "Producto Animal");
     Abarrotes.agregarProducto(huevo);
-    Abarrotes.mostrarProductos();
+    //Abarrotes.mostrarProductos();
     Abarrotes.restockProducto("H123", 20);
-    Abarrotes.mostrarProductos();
+   // Abarrotes.mostrarProductos();
     cout << "Ventas realizadas: " << Abarrotes.getVentas() << endl;
     return 0;
 }
