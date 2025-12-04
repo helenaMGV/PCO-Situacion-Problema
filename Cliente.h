@@ -36,6 +36,8 @@ public:
     bool confirmarCompra();
     float calcularTotal();
     void pagar();
+
+    ~Cliente();
 };
 
 
