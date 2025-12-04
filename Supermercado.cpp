@@ -61,6 +61,37 @@ void Supermercado::mostrarProductos(){
     }
 }
 
+void Supermercado::leerFichero(const string & fichero) {
+    ifstream archivo(fichero);
+    if (!archivo.is_open()) {
+        cout << "Error al abrir archivo" << endl;
+        return;
+    }
+
+    string id, nombre, tipo, precioStr;
+    float precio;
+
+    // Ignorar encabezado
+    getline(archivo, id);
+
+    while (true) {
+        if (!getline(archivo, id, ',')) break;
+        if (!getline(archivo, nombre, ',')) break;
+        if (!getline(archivo, tipo, ',')) break;
+        if (!getline(archivo, precioStr)) break; // Último campo
+
+        precio = stof(precioStr);
+
+        Producto p(nombre, id, precio, tipo);
+        productos.push_back(p);
+    }
+
+    archivo.close();
+    cout << "Productos importados correctamente" << endl;
+}
+
+
+
 
 //              METODOS CLIENTE
 Cliente& Supermercado::getCliente() {
@@ -120,43 +151,16 @@ int Supermercado::getVentas() const {
     return ventas;
 }
 
+// Metodo para simular pago con contacto
+void Supermercado::pagoSinContacto(){
+    cout << "Pago sin contacto procesado exitosamente";
+}
+
 
 //              DESTRUCTOR
 Supermercado::~Supermercado() {
     // Nada especial aquí
 }
 
-void Supermercado::leerFichero(const string & fichero) {
-    ifstream archivo(fichero);
-    if (!archivo.is_open()) {
-        cout << "Error al abrir archivo.\n";
-        return;
-    }
 
-    string id, nombre, tipo, precioStr;
-    float precio;
-
-    while (true) {
-        // Leer las 4 líneas por producto
-        if (!getline(archivo, id)) break;
-        if (!getline(archivo, nombre)) break;
-        if (!getline(archivo, tipo)) break;
-        if (!getline(archivo, precioStr)) break;
-
-        // Convertir precio string -> float
-        precio = stof(precioStr);
-
-        // Crear producto y agregarlo al vector
-        Producto p(nombre, id, precio, tipo);
-        productos.push_back(p);
-    }
-
-    archivo.close();
-    cout << "Productos importados correctamente.\n";
-}
-
-// Metodo para simular pago con contacto
-void Supermercado::pagoSinContacto(){
-    cout << "Pago sin contacto procesado exitosamente"; 
-}
 
