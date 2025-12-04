@@ -18,17 +18,21 @@ private:
     float dinero;
     float total;
 public:
+    //CONSTRUCTOR
     Cliente();
     Cliente(string cNombre, float cDinero);
 
+    //METODOS PRODUCTO
     int buscarProducto (string cNombreProducto);
     void agregarProducto (Supermercado & cTienda);
     void quitarProducto(string cNombreProducto, Supermercado &cTienda);
+    vector<Producto>& getCarrito();
+
+    //METODOS CARRITO
     void vaciarCarrito();
     void mostrarCarrito();
 
-    vector<Producto>& getCarrito();
-
+    //METODOS COMPRA
     bool confirmarCompra();
     float calcularTotal();
     void pagar();

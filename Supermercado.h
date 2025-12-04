@@ -18,28 +18,30 @@ private:
   int ventas;
 
 public:
+  //CONSTRUCTORES
   Supermercado();
   Supermercado(const string &cNombre, const Cliente &cCLiente);
 
+  //  METODOS PRODUCTO
   void leerFichero(const string & fichero);
   void agregarProducto(const Producto & cProducto);
   void eliminarProducto(const string &ID);
   int buscarProducto(const string &ID);
   void restockProducto(const string &id, int unidades);
+  vector<Producto>& getProductos();
+  void mostrarProductos() ;
 
+    //METODOS CLIENTE
   Cliente& getCliente();
   void setCliente(Cliente &cCliente);
 
 
-  vector<Producto>& getProductos();
-  void mostrarProductos() ;
-
+  //METODOS VENTA
   bool realizarVenta();
   int getVentas() const;
-
   void pagoSinContacto();
 
-
+//DESTRUCTOR
 ~Supermercado();
 };
 

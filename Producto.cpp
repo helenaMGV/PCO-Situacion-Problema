@@ -19,24 +19,31 @@ Producto::Producto(string cNombre, string cID, float cPrecio, string cTipo):nomb
 void Producto::restock(int unidades) {
     this -> inventario += unidades;
 }
+
 void Producto::quitar(int unidades) {
     this -> inventario -= unidades;
 }
+
 bool Producto::hayExistencia( int unidades){
     return (inventario >= unidades);
 }
+
 string Producto::getID() const { 
     return ID; 
 }
+
 string Producto::getNombre() const { 
     return nombre; 
 }
+
 float Producto::getPrecio() const { 
     return precio; 
 }
+
 int Producto:: getInventario() const { 
     return inventario; 
 }
+
 void Producto::print() {
     cout << "Producto: "<< nombre << ", $" << precio << endl;
     cout << "   Tipo: " << tipo << endl;

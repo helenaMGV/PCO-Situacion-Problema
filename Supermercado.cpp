@@ -2,9 +2,9 @@
 #include "Cliente.h"
 #include <iostream>
 #include <fstream>
-
 using namespace std;
 
+//                  CONSTRUCTORES
 Supermercado::Supermercado() { 
 nombre = "";
 ventas = 0; }
@@ -15,6 +15,7 @@ clienteActual = cCliente;
 ventas = 0;
 }
 
+//                  METODOS PRODUCTO
 void Supermercado::agregarProducto(const Producto &cProducto) {
     productos.push_back(cProducto);
 }
@@ -51,14 +52,6 @@ vector<Producto>& Supermercado::getProductos() {
     return productos;
 }
 
-Cliente& Supermercado::getCliente() {
-    return clienteActual;
-}
-void Supermercado::setCliente(Cliente &cCliente) {
-    clienteActual = cCliente;
-}
-
-
 void Supermercado::mostrarProductos(){
     cout << endl << "--- Inventario del Supermercado ---" << endl;
     for (auto & cProducto : productos){
@@ -68,7 +61,19 @@ void Supermercado::mostrarProductos(){
     }
 }
 
-    bool Supermercado::realizarVenta() {
+
+//              METODOS CLIENTE
+Cliente& Supermercado::getCliente() {
+    return clienteActual;
+}
+void Supermercado::setCliente(Cliente &cCliente) {
+    clienteActual = cCliente;
+}
+
+
+
+//              METODOS VENTA
+bool Supermercado::realizarVenta() {
 
         float total = clienteActual.calcularTotal();
 
@@ -123,6 +128,8 @@ int Supermercado::getVentas() const {
     return ventas;
 }
 
+
+//              DESTRUCTOR
 Supermercado::~Supermercado() {
     // Nada especial aquí
 }
