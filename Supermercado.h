@@ -22,10 +22,10 @@ public:
   Supermercado(const string &cNombre, const Cliente &cCLiente);
 
   void leerFichero(const string & fichero);
-  void agregarProducto(const Producto &cProducto);
+  void agregarProducto(const Producto & cProducto);
   void eliminarProducto(const string &ID);
   int buscarProducto(const string &ID);
-
+  void restockProducto(const string &id, int unidades);
   Cliente& getCliente();
 
   vector<Producto>& getProductos();

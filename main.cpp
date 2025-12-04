@@ -8,7 +8,6 @@ int main() {
     Supermercado OXXO;
     OXXO.leerFichero("Productos.txt");
 
-
     Cliente clienteA("Sasha", 100);
 
     cout << "--------- Bienvenido a OXXO ---------" << endl;
@@ -62,6 +61,7 @@ int main() {
                             clienteA.pagar();
                             cout << "Gracias por su compra"<<endl;
                             salir = true;
+                            OXXO.realizarVenta();
                             break;
 
                         //PAGAR REGULARMENTE
@@ -69,6 +69,7 @@ int main() {
                             clienteA.pagar();
                             cout << "Gracias por su compra"<<endl;
                             salir = true;
+                            OXXO.realizarVenta();
                             break;
                     }
 
@@ -87,6 +88,11 @@ int main() {
                 break;
         }
     }
-
+    Producto huevo("huevo","H123", 34.00, "Producto Animal");
+    OXXO.agregarProducto(huevo);
+    OXXO.mostrarProductos();
+    OXXO.restockProducto("H123", 20);
+    OXXO.mostrarProductos();
+    cout << "Ventas realizadas: " << OXXO.getVentas() << endl;
     return 0;
 }

@@ -40,6 +40,13 @@ int Supermercado::buscarProducto(const string &ID) {
     return -1;
 }
 
+void Supermercado::restockProducto(const string & ID, int unidades) {
+    int index = buscarProducto(ID);
+    if (index != -1) {
+        productos[index].restock(unidades);
+    }
+}
+
 vector<Producto>& Supermercado::getProductos() {
     return productos;
 }
