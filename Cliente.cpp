@@ -145,3 +145,5 @@ void Cliente::pagar() {
     cout << "Dinero restante: " << dinero << endl;
 }
 
+Cliente::~Cliente(){}
+
