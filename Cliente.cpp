@@ -60,21 +60,21 @@ void Cliente::agregarProducto(Supermercado &cTienda) {
     }
 }
 
-void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
-    int unidades;
 
+void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
     cout << "¿Cuantas unidades desea quitar? ";
     string input;
     getline(cin, input);
-    unidades = stoi(input);
+    int unidades = stoi(input);
 
-    int contadorQuitados = 0;
+    if (unidades <= 0) {
+        cout << "Cantidad inválida." << endl;
+        return;
+    }
 
-    // 1Encontrar producto en inventario del Supermercado
+        //  Encontrar producto en inventario del Supermercado
     vector<Producto>& inventario = cTienda.getProductos();
     Producto* productoSuper = nullptr;
-
-    //designar objeto por referencia a producto buscado
     for (auto& p : inventario) {
         if (p.getNombre() == cNombreProducto) {
             productoSuper = &p;
@@ -82,33 +82,30 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
         }
     }
 
-    //Si el producto a eliminar no existe
     if (productoSuper == nullptr) {
         cout << "Error: producto no encontrado en tienda." << endl;
         return;
     }
 
-    // Quitar del carrito y regresar inventario
-    for (int i = 0; i < carrito.size() && contadorQuitados < unidades; ) {
-        if (carrito[i].getNombre() == cNombreProducto) {
-            carrito.erase(carrito.begin() + i);
-            contadorQuitados++;
-        } else {
-            i++;
-        }
+        //  Quitar del carrito usando buscarProducto
+    int contadorQuitados = 0;
+    int index;
+    while (contadorQuitados < unidades) {
+        index = buscarProducto(cNombreProducto); // índice del primer producto en el carrito
+        if (index == -1) break;                   // no quedan más productos en el carrito
+        carrito.erase(carrito.begin() + index);   // quitar del carrito
+        contadorQuitados++;
     }
-    // Regresar inventario
+
+        // Regresar inventario al supermercado
     if (contadorQuitados > 0) {
         productoSuper->restock(contadorQuitados);
-        cout << "Se quitaron " << contadorQuitados << " unidad(es)." << endl;
-    }
-    // Resultados
-    if (contadorQuitados == 0) {
-        cout << "El producto '" << cNombreProducto << "' no esta en el carrito." << endl;
-    } else {
         cout << "Se quitaron " << contadorQuitados << " unidad(es) de " << cNombreProducto << "." << endl;
+    } else {
+        cout << "El producto '" << cNombreProducto << "' no esta en el carrito." << endl;
     }
 }
+
 
 //          METODOS CARRITO
 void Cliente::vaciarCarrito() {

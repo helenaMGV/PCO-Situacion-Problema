@@ -87,14 +87,6 @@ bool Supermercado::realizarVenta() {
             return false;
         }
 
-        //  Contar cuántas unidades de cada producto hay en el carrito
-        for (int i = 0; i < productos.size(); i++) {
-            for (auto &pCarrito : clienteActual.getCarrito()) {
-                if (productos[i].getID() == pCarrito.getID()) {
-                }
-            }
-        }
-
         // Mostrar ticket básico
         cout << endl << "========== TICKET DE COMPRA ==========" << endl;
         for (auto &prod : productos) {
