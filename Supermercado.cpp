@@ -54,6 +54,10 @@ vector<Producto>& Supermercado::getProductos() {
 Cliente& Supermercado::getCliente() {
     return clienteActual;
 }
+void Supermercado::setCliente(Cliente &cCliente) {
+    clienteActual = cCliente;
+}
+
 
 void Supermercado::mostrarProductos(){
     cout << endl << "--- Inventario del Supermercado ---" << endl;
@@ -64,37 +68,56 @@ void Supermercado::mostrarProductos(){
     }
 }
 
-bool Supermercado::realizarVenta() {
+    bool Supermercado::realizarVenta() {
 
-    float total = clienteActual.calcularTotal();
+        float total = clienteActual.calcularTotal();
 
-    if (total <= 0) {
-        cout << "El carrito esta vacio" << endl;
-        return false;
-    }
-
-    if (!clienteActual.confirmarCompra()) {
-        cout << "El cliente no prosiguio la compra" << endl;
-        return false;
-    }
-
-    // Descontar inventario
-    for (const auto &prodCarrito : clienteActual.getCarrito()) {
-
-        int index = buscarProducto(prodCarrito.getID());
-        if (index != -1) {
-            productos[index].quitar(1);  // 1 unidad
+        if (total <= 0) {
+            cout << "El carrito está vacío" << endl;
+            return false;
         }
+
+        if (!clienteActual.confirmarCompra()) {
+            cout << "El cliente no tiene dinero suficiente" << endl;
+            return false;
+        }
+
+        //  Contar cuántas unidades de cada producto hay en el carrito
+        for (int i = 0; i < productos.size(); i++) {
+            for (auto &pCarrito : clienteActual.getCarrito()) {
+                if (productos[i].getID() == pCarrito.getID()) {
+                }
+            }
+        }
+
+        // Mostrar ticket básico
+        cout << endl << "========== TICKET DE COMPRA ==========" << endl;
+        for (auto &prod : productos) {
+            int unidades = 0;
+            for (auto &pCarrito : clienteActual.getCarrito()) {
+                if (prod.getID() == pCarrito.getID()) {
+                    unidades++;
+                }
+            }
+            if (unidades > 0) {
+                float subtotal = prod.getPrecio() * unidades;
+                cout << prod.getNombre() << " x" << unidades << "  $" << subtotal << endl;
+            }
+        }
+        cout << "--------------------------------------" << endl;
+        cout << "TOTAL A PAGAR: $" << total << endl;
+        cout << "--------------------------------------" << endl;
+
+        // Procesar pago
+        clienteActual.pagar();
+
+        // Incrementar ventas
+        ventas++;
+
+
+        cout << "Venta realizada con éxito" << endl;
+        return true;
     }
-
-    clienteActual.pagar();
-    pagoSinContacto(); // Implementacion de pago sin contacto
-    
-    ventas++;
-
-    cout << "Venta realizada con éxito" << endl;
-    return true;
-}
 
 int Supermercado::getVentas() const {
     return ventas;

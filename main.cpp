@@ -9,6 +9,7 @@ int main() {
     OXXO.leerFichero("Productos.txt");
 
     Cliente clienteA("Sasha", 100);
+    OXXO.setCliente(clienteA);
 
     cout << "--------- Bienvenido a OXXO ---------" << endl;
     bool salir = false;
@@ -58,18 +59,16 @@ int main() {
                         //PAGAR SIN CONTACTO
                         case 'S':
                         OXXO.pagoSinContacto();
-                            clienteA.pagar();
+                            OXXO.realizarVenta();
                             cout << "Gracias por su compra"<<endl;
                             salir = true;
-                            OXXO.realizarVenta();
                             break;
 
                         //PAGAR REGULARMENTE
                         case 'R':
-                            clienteA.pagar();
+                            OXXO.realizarVenta();
                             cout << "Gracias por su compra"<<endl;
                             salir = true;
-                            OXXO.realizarVenta();
                             break;
                     }
 

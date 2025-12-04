@@ -69,8 +69,6 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
     getline(cin, input);
     unidades = stoi(input);
 
-
-
     int contadorQuitados = 0;
 
     // 1Encontrar producto en inventario del Supermercado
