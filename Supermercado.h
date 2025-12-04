@@ -13,10 +13,10 @@
 class Supermercado {
 private:
   string nombre;
-  //PUNTERO DE CLASES
   Cliente clienteActual;
   vector<Producto> productos;
   int ventas;
+
 public:
   Supermercado();
   Supermercado(const string &cNombre, const Cliente &cCLiente);
@@ -27,8 +27,8 @@ public:
   int buscarProducto(const string &ID);
 
   Cliente& getCliente();
-  vector<Producto>& getProductos();
 
+  vector<Producto>& getProductos();
   void mostrarProductos() ;
 
   bool realizarVenta();

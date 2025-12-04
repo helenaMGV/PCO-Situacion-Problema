@@ -49,7 +49,7 @@ Cliente& Supermercado::getCliente() {
 }
 
 void Supermercado::mostrarProductos(){
-    cout << "\n--- Inventario del Supermercado ---" << endl;
+    cout << endl << "--- Inventario del Supermercado ---" << endl;
     for (auto & cProducto : productos){
         cProducto.print();
         cout << "   Inventario: " << cProducto.getInventario() << endl;
@@ -62,12 +62,12 @@ bool Supermercado::realizarVenta() {
     float total = clienteActual.calcularTotal();
 
     if (total <= 0) {
-        cout << "El carrito está vacío" << endl;
+        cout << "El carrito esta vacio" << endl;
         return false;
     }
 
     if (!clienteActual.confirmarCompra()) {
-        cout << "El cliente no prosiguió la compra" << endl;
+        cout << "El cliente no prosiguio la compra" << endl;
         return false;
     }
 

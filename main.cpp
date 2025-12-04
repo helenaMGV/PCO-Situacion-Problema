@@ -6,10 +6,87 @@ using namespace std;
 
 int main() {
     Supermercado OXXO;
-    string archivo = "Productos.txt";
-    OXXO.leerFichero(archivo);
-    Cliente ClienteInicial("Sasha", 100);
+    OXXO.leerFichero("Productos.txt");
 
+
+    Cliente clienteA("Sasha", 100);
+
+    cout << "--------- Bienvenido a OXXO ---------" << endl;
+    bool salir = false;
+    int opcion;
+
+    while (!salir) {
+
+        cout << "--------MENU-------"<< endl;
+        cout << "1. Mostrar productos disponibles"<< endl;;
+        cout << "2. Agregar producto al carrito" << endl;;
+        cout << "3. Quitar producto del carrito" << endl;
+        cout << "4. Mostrar carrito" << endl;
+        cout << "5. Pagar" << endl;
+        cout << "6. Salir" << endl;
+        cout << "Elige una opcion: " << endl;
+        cin >> opcion;
+        cin.ignore();
+
+        switch (opcion) {
+            case 1:
+                OXXO.mostrarProductos();
+                break;
+
+            case 2: {
+                clienteA.agregarProducto(OXXO);
+                break;
+            }
+
+            case 3: {
+                cout << "Ingrese el nombre del producto a eliminar: ";
+                string nombreEliminar;
+                getline(cin, nombreEliminar);
+                clienteA.quitarProducto(nombreEliminar, OXXO);
+                break;
+            }
+
+            case 4:
+                clienteA.mostrarCarrito();
+                break;
+
+            case 5:
+                if (clienteA.confirmarCompra()) {
+                    cout << "Desea pagar sin contacto o regularmente?: (S: Sin Contacto, R:Regularmente) "<<endl;
+                    char opcionPago;
+                    cin >> opcionPago;
+                    switch (opcionPago) {
+                        //PAGAR SIN CONTACTO
+                        case 'S':
+                        OXXO.pagoSinContacto();
+                            clienteA.pagar();
+                            cout << "Gracias por su compra"<<endl;
+                            salir = true;
+                            break;
+
+                        //PAGAR REGULARMENTE
+                        case 'R':
+                            clienteA.pagar();
+                            cout << "Gracias por su compra"<<endl;
+                            salir = true;
+                            break;
+                    }
+
+                } else {
+                    cout << "No tiene dinero suficiente"<<endl;
+                }
+                break;
+
+            case 6:
+                cout << "Saliendo del OXXO"<<endl;
+                salir = true;
+                break;
+
+            default:
+                cout << "Opcion inválida. Intente de nuevo"<<endl;
+                break;
+        }
+    }
+
+    return 0;
 }
-
-
