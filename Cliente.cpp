@@ -1,7 +1,6 @@
 //
 // Created by Karla on 03/12/2025.
 //
-
 #include "Cliente.h"
 #include "Supermercado.h"
 #include "Producto.h"
@@ -9,7 +8,7 @@
 using namespace std;
 #include <string>
 
-
+//CONSTRUCTORES
 Cliente::Cliente() {
     nombre = "";
     dinero = 0.0;
@@ -22,6 +21,7 @@ Cliente::Cliente(string cNombre, float cDinero) {
     total = 0.0;
 }
 
+//          METODOS PRODUCTO
 void Cliente::agregarProducto(Supermercado &cTienda) {
     string nombreProducto;
     int unidades;
@@ -59,7 +59,6 @@ void Cliente::agregarProducto(Supermercado &cTienda) {
         cout << "El producto '" << nombreProducto << "' no existe en el supermercado"<< endl;
     }
 }
-
 
 void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
     int unidades;
@@ -111,9 +110,11 @@ void Cliente::quitarProducto(string cNombreProducto, Supermercado &cTienda) {
     }
 }
 
+//          METODOS CARRITO
 void Cliente::vaciarCarrito() {
     carrito.clear();
 }
+
 void Cliente::mostrarCarrito() {
     if (carrito.size() == 0) {
         cout << "Su carrito esta vacio" << endl;
@@ -123,8 +124,12 @@ void Cliente::mostrarCarrito() {
     }
 }
 
+vector<Producto>& Cliente::getCarrito() {
+    return carrito;
+}
 
-    float Cliente::calcularTotal() {
+//          METODOS COMPRA
+float Cliente::calcularTotal() {
         total = 0.0;  // REINICIAR
         for (int i = 0; i < carrito.size(); i++) {
             total += carrito[i].getPrecio();
@@ -142,6 +147,4 @@ void Cliente::pagar() {
     dinero -= total;
     cout << "Dinero restante: " << dinero << endl;
 }
-vector<Producto>& Cliente::getCarrito() {
-    return carrito;
-}
+

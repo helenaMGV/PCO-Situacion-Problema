@@ -11,6 +11,8 @@ int main() {
     Cliente clienteA("Sasha", 100);
     OXXO.setCliente(clienteA);
 
+
+    //TESTEO CLASE CLIENTE
     cout << "--------- Bienvenido a OXXO ---------" << endl;
     bool salir = false;
     int opcion;
@@ -87,6 +89,8 @@ int main() {
                 break;
         }
     }
+
+    //TESTEO DE CLASE SUPERMERCADO Y PRODUCTO
     Producto huevo("huevo","H123", 34.00, "Producto Animal");
     OXXO.agregarProducto(huevo);
     OXXO.mostrarProductos();
