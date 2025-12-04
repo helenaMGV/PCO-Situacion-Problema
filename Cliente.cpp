@@ -21,6 +21,11 @@ Cliente::Cliente(string cNombre, float cDinero) {
     total = 0.0;
 }
 
+// SETTER
+void Cliente::setTotal(float cTotal) {
+    total = cTotal;
+}
+
 //          METODOS PRODUCTO
 int Cliente::buscarProducto(string cNombreProducto) {
     for (int i = 0; i < carrito.size(); i++) {
@@ -140,7 +145,8 @@ float Cliente::calcularTotal() {
         for (int i = 0; i < carrito.size(); i++) {
             total += carrito[i].getPrecio();
         }
-        return total;
+    setTotal(total);
+    return total;
     }
 
 bool Cliente::confirmarCompra() {

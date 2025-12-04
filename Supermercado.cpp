@@ -105,47 +105,61 @@ void Supermercado::setCliente(Cliente &cCliente) {
 
 //              METODOS VENTA
 bool Supermercado::realizarVenta() {
+    // Calcular total del carrito y actualizar el atributo total del cliente
+    float total = clienteActual.calcularTotal();
 
-        float total = clienteActual.calcularTotal();
-
-        if (total <= 0) {
-            cout << "El carrito está vacío" << endl;
-            return false;
-        }
-
-        if (!clienteActual.confirmarCompra()) {
-            cout << "El cliente no tiene dinero suficiente" << endl;
-            return false;
-        }
-
-        // Mostrar ticket básico
-        cout << endl << "========== TICKET DE COMPRA ==========" << endl;
-        for (auto &prod : productos) {
-            int unidades = 0;
-            for (auto &pCarrito : clienteActual.getCarrito()) {
-                if (prod.getID() == pCarrito.getID()) {
-                    unidades++;
-                }
-            }
-            if (unidades > 0) {
-                float subtotal = prod.getPrecio() * unidades;
-                cout << prod.getNombre() << " x" << unidades << "  $" << subtotal << endl;
-            }
-        }
-        cout << "--------------------------------------" << endl;
-        cout << "TOTAL A PAGAR: $" << total << endl;
-        cout << "--------------------------------------" << endl;
-
-        // Procesar pago
-        clienteActual.pagar();
-
-        // Incrementar ventas
-        ventas++;
-
-
-        cout << "Venta realizada con éxito" << endl;
-        return true;
+    // Verificar si el cliente tiene suficiente dinero
+    if (!clienteActual.confirmarCompra()) {
+        cout << "El cliente no tiene dinero suficiente" << endl;
+        return false;
     }
+
+    // Mostrar ticket
+    cout << endl << "========== TICKET DE COMPRA ==========" << endl;
+
+    vector<Producto> carrito = clienteActual.getCarrito();
+    vector<string> productosEscaneados; // Para no repetir productos en el ticket
+
+    //BUCLE REGISTRAR NOMBRE Y TOTAL Por cada producto
+    for (int i = 0; i < carrito.size(); i++) {
+        string nombre = carrito[i].getNombre();
+        // Saltar proceso si ya se registro este producto
+        bool yaRegistrado = false;
+        for (int k = 0; k < productosEscaneados.size(); k++) {
+            if (productosEscaneados[k] == nombre) {
+                yaRegistrado = true;
+                break;
+            }
+        }
+        if (yaRegistrado) continue;
+
+        // REGISTRAR UNIDADES de cada producto  en el carrito
+        int unidades = 0;
+        for (int j = 0; j < carrito.size(); j++) {
+            if (carrito[j].getNombre() == nombre) unidades++;
+        }
+        //CALCULAR TOTAL POR PRODUCTO
+        float subtotal = carrito[i].getPrecio() * unidades;
+        cout << nombre << " x" << unidades << "  $" << subtotal << endl;
+
+        //AGREGAR PRODUCTO A TICKET
+        productosEscaneados.push_back(nombre);
+    }
+
+    cout << "--------------------------------------" << endl;
+    cout << "TOTAL A PAGAR: $" << total << endl;
+    cout << "--------------------------------------" << endl;
+
+    // Procesar pago
+    clienteActual.pagar();
+    // Vaciar carrito para la próxima compra
+    clienteActual.vaciarCarrito();
+    // Incrementar ventas
+    ventas++;
+    cout << "Venta realizada con exito" << endl;
+    return true;
+}
+
 
 int Supermercado::getVentas() const {
     return ventas;

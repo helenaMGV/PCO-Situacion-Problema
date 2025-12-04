@@ -36,7 +36,7 @@ int main() {
                 break;
 
             case 2: {
-                clienteA.agregarProducto(Abarrotes);
+                Abarrotes.getCliente().agregarProducto(Abarrotes);
                 break;
             }
 
@@ -44,7 +44,7 @@ int main() {
                 cout << "Ingrese el nombre del producto a eliminar: ";
                 string nombreEliminar;
                 getline(cin, nombreEliminar);
-                clienteA.quitarProducto(nombreEliminar, Abarrotes);
+                Abarrotes.getCliente().quitarProducto(nombreEliminar, Abarrotes);
                 break;
             }
 
