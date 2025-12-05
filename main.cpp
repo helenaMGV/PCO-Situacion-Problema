@@ -6,12 +6,12 @@ using namespace std;
 
 int main() {
     Supermercado Abarrotes;
-    Abarrotes.leerFichero("Productos.txt");
+    Abarrotes.leerFichero("Productos.csv");
 
     Cliente clienteA("Sasha", 100);
     Abarrotes.setCliente(clienteA);
 
-    cout << "--------- Bienvenido a Abarrotes 'Doña Maria' ---------" << endl;
+    cout << "--------- Bienvenido a Abarrotes 'Donia Maria' ---------" << endl;
 
     bool salir = false;
     int opcion;
