@@ -16,6 +16,7 @@ private:
   Cliente clienteActual;
   vector<Producto> productos;
   int ventas;
+  vector<Producto>& getProductos();
 
 public:
   //CONSTRUCTORES
@@ -28,7 +29,6 @@ public:
   void eliminarProducto(const string &ID);
   int buscarProducto(const string &ID);
   void restockProducto(const string &id, int unidades); //llama Metodo producto restock()
-  vector<Producto>& getProductos();
   void mostrarProductos() ; //usa metodo print de clase producto
 
     //METODOS CLIENTE
