@@ -106,7 +106,12 @@ void Supermercado::setCliente(Cliente &cCliente) {
 //              METODOS VENTA
 bool Supermercado::realizarVenta() {
     // Calcular total del carrito y actualizar el atributo total del cliente
-    float total = clienteActual.calcularTotal();
+
+    // Validar que el carrito no esté vacío
+    if (clienteActual.calcularTotal() == 0) {
+        cout << "El carrito esta vacio. No se puede realizar la venta." << endl;
+        return false;
+    }
 
     // Verificar si el cliente tiene suficiente dinero
     if (!clienteActual.confirmarCompra()) {
@@ -114,12 +119,9 @@ bool Supermercado::realizarVenta() {
         return false;
     }
 
-    // Mostrar ticket
-    cout << endl << "========== TICKET DE COMPRA ==========" << endl;
-
     vector<Cliente::ProductoResumen> resumen = clienteActual.getResumenCarrito();
 
-    cout << "========== TICKET DE COMPRA ==========" << endl;
+    cout << endl<< "========== TICKET DE COMPRA ==========" << endl;
     for (auto &r : resumen) {
         cout << r.nombre << " x" << r.cantidad << "  $" << r.precio * r.cantidad << endl;
     }

@@ -58,6 +58,7 @@ int main() {
                     char opcionPago;
                     cin >> opcionPago;
 
+                    opcionPago = toupper(opcionPago);
                     switch (opcionPago) {
                         case 'S':
                             Abarrotes.pagoSinContacto();
@@ -93,10 +94,12 @@ int main() {
     }
 
     // TESTEO DE SUPERMERCADO Y PRODUCTO
-    Producto huevo("huevo", "H123", 34.00, "Producto Animal");
-    Abarrotes.agregarProducto(huevo);
+    Producto tostitos("Tostitos", "A001", 24, "Comida Chatarra");
+    Abarrotes.agregarProducto(tostitos);
     //Abarrotes.mostrarProductos();
-    Abarrotes.restockProducto("H123", 20);
+    Abarrotes.restockProducto("0010", 5);
+    Abarrotes.mostrarProductos();
+    Abarrotes.eliminarProducto("A001");
     Abarrotes.mostrarProductos();
     cout << "Ventas realizadas: " << Abarrotes.getVentas() << endl;
     return 0;
